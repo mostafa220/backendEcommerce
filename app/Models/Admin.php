@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Admin extends Authenticatable 
+class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 

@@ -21,7 +21,7 @@ class AuthController extends Controller
         $user->image=$request->image;
         $user->gender=$request->gender;
         $user->save();
-        return $user; 
+        return $user;
     }
     public function login(Request $request){
 
@@ -39,8 +39,8 @@ class AuthController extends Controller
         else{
             return 'un authorized';
         }
-        
-        
+
+
     }
 
     public function update(UpdateRequest $request,$id){
@@ -51,20 +51,34 @@ class AuthController extends Controller
         $user->image=$request->image;
         $user->gender=$request->gender;
         $user->save();
-        return $user; 
+        return $user;
     }
 
     public function delete($id){
 
         $user=User::findOrFail($id);
         $user->delete();
-        return $user; 
+        return $user;
     }
 
 
     public function upload(Request $request){
-        $image_path = $request->file('file')->store('images', 'public');
-       
-        return $image_path; 
+        $image_path = $request->file('file')->store('images/products', 'public');
+        // $image_path = $request->image->move(public_path('images'), $image_name);
+
+        // $extension = $request->file->getClientOriginalExtension();
+
+        // $image_name = str_replace(' ', '', trim($request->model) . time() . "." . $extension);
+        // $image_name = str_replace(' ', '', trim($request->file) . "." . $extension);
+
+        $image_name = $request->file->getClientOriginalName();
+
+
+
+    //     $data = Image::create([
+    //         'name' => $image_path,
+    //         'product_id'=>1
+    //    ]);
+        return $image_name;
     }
 }

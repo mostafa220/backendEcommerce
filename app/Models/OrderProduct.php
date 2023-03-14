@@ -13,7 +13,7 @@ class OrderProduct extends Model
     // protected $fillable = ['order_id', 'product_name', 'price', 'quantity'];
     protected $guard = [];
     public $timestamps = false;
-     
+
     public function order()
     {
         return $this->belongsTo(Order::class);

@@ -53,11 +53,11 @@ class ProductController extends Controller
         $product->status=$request->status;
         $product->category_id=$request->category_id;
         $product->save();
-         
+
         return $product;
 
-       
-        
+
+
 
 
     }
@@ -79,7 +79,7 @@ class ProductController extends Controller
     {
         // $product=Product::where("name",$name)->get();
         $product= ProductResource::collection(Product::where("name",$name)->get());
-        //   
+        //
         return $product;
     }
 
@@ -91,22 +91,22 @@ class ProductController extends Controller
         //     ->where('categories.name', $catName)
         //     ->get();
         // // $category=Category::where("name",$catName)->get();
-      
-        
+
+
 
         // $category = Product::select('products.*')->whereHas('categories', function($query) use ($catName){
         //     $query->where('categories.name', $catName);
         // })->get();
-        //   
+        //
         // $category= ProductResource::collection($category);
-     
+
 
         $category = Category::where('name', $catName)->first();
 
         $products = Product::whereHas('category', function($query) use ($category) {
             $query->where('id', $category->id);
         })->get();
-        
+
 
          $products= ProductResource::collection($products);
         return $products;
@@ -120,7 +120,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-       
+
     }
 
     /**
@@ -143,7 +143,7 @@ class ProductController extends Controller
         $product->status=$request->status;
         $product->category_id=$request->category_id;
         $product->save();
-         
+
         return $product;
     }
 
@@ -157,6 +157,6 @@ class ProductController extends Controller
     {
         $product=Product::find($id);
         $product->delete();
-        return $products;
+        return $product;
     }
 }

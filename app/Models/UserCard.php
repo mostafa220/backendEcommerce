@@ -4,18 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
 
-
-class Product extends Model
+class UserCard extends Model
 {
     use HasFactory;
-    protected $guard=[];
+
+
     public $timestamps = false;
 
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

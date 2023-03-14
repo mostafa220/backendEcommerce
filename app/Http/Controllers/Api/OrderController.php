@@ -12,18 +12,18 @@ class OrderController extends Controller
 {
     public function store(Request $request){
         $order = new Order();
-    
-    if (Auth::check()) {
-        $order->user_id = auth()->user('admin-api')->id;
-    } else {
-        return 'no logged in';
-    }
 
-      return optional(Auth::user())->id;
-        // $order->name =$request->name;
-        // $order->total_price = $request->total_price;
-        // $order->user_id =Auth::user()->id ;
-        // $order->save();
+    // if (Auth::check()) {
+    //     $order->user_id = auth()->user()->id;
+    // } else {
+    //     return 'no logged in';
+    // }
+
+    //   return optional(Auth::user())->id;
+        $order->name = Auth::user()->name ;
+        $order->total_price = $request->total_price;
+        $order->user_id =Auth::user()->id ;
+        $order->save();
 
         // latest
         // return Order::all()->latest();
@@ -33,7 +33,7 @@ class OrderController extends Controller
         //     ['product_id' => 1, 'price' => 100, 'quantity' => 2],
         //     ['product_id' => 2, 'price' => 110, 'quantity' => 1],
         // ];
-        
+
         foreach ($request->orderProducts as $product) {
             $orderProduct = new OrderProduct();
             $orderProduct->order_id = $order->id;
@@ -42,10 +42,11 @@ class OrderController extends Controller
             $orderProduct->quantity = $product['quantity'];
             $orderProduct->save();
         }
-        
+
         // Return the order with its associated products
         return $order->load('orderProducts');
     }
 
 
 }
+
